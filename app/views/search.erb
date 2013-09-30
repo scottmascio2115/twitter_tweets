@@ -4,3 +4,15 @@
   <li><%= tweet %></li>
 <% end %>
 </ul>
+
+<% @images.each do |image| %>  
+  <% if image[:geo] %>
+<a href="http://www.twitter.com/<%= image[:user][:screen_name] %>"><img src="<%= image[:profile_image_url] %>" alt="Smiley face" height="250" width="250"></a>
+  <%= image[:geo][:coordinates] %>
+  
+  <% end %>
+
+    
+
+
+<% end %>

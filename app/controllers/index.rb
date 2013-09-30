@@ -25,9 +25,15 @@ post '/post' do
   handle = params[:twitter_handle]
   phrase = params[:phrase]
   @tweets = []
-  Twitter.search("to:#{handle} #{phrase}", :count => 100, :result_type => "recent").results.map do |status|
+  @images = []
+  @coords = []
+  Twitter.search("to:#{handle} #{phrase}", :count => 5, :result_type => "recent").results.map do |status|
+    @images << status
     @tweets << "#{status.from_user}: #{status.text}"
   end
   @tweets
+  @images.each do |image|
+    @coords << image[:geo]
+  end
   erb :search
 end
