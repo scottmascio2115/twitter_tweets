@@ -1,5 +1,5 @@
-<%= @user.name %>: <%= @user.user_name %>
+<%= @user.name %>: <%= @user.user_name %><br>
 tweet count: <%= @tweets.count %>
 <% @tweets.each do |tweet| %>
-  <%= tweet.text %><br>
+  <br><%= tweet.text %>
 <% end %>
