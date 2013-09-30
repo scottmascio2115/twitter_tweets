@@ -9,11 +9,15 @@ class TwitterUser < ActiveRecord::Base
   end
 
   def tweets_stale?
-    total_time = 0
-    self.tweets[-11..-1].each do |tweet|
-      total_time += (tweet.created_at - Tweet.find(tweet.id - 1).created_at)
+    if self.tweets.empty?
+      fetch_tweets!
+    else
+      total_time = 0
+      self.tweets[-11..-1].each do |tweet|
+        total_time += (tweet.created_at - Tweet.find(tweet.id - 1).created_at)
+      end
+      avg_time = total_time / self.tweets[-11..-1].count
+      Time.now - self.tweets.first.created_at < avg_time
     end
-    avg_time = total_time / self.tweets[-11..-1].count
-    Time.now - self.tweets.first.created_at < avg_time
   end
 end
