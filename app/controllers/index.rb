@@ -25,15 +25,18 @@ post '/post' do
   handle = params[:twitter_handle]
   phrase = params[:phrase]
   @tweets = []
-  @images = []
-  @coords = []
-  Twitter.search("to:#{handle} #{phrase}", :count => 5, :result_type => "recent").results.map do |status|
-    @images << status
-    @tweets << "#{status.from_user}: #{status.text}"
+ 
+  Twitter.search("to:#{handle} #{phrase}", :count => 1000000000, :result_type => "recent").results.map do |status|
+
+    @tweets << status 
   end
-  @tweets
-  @images.each do |image|
-    @coords << image[:geo]
-  end
+
   erb :search
 end
+
+post '/create_tweet' do 
+  Twitter.update(params[:text])
+
+  redirect to '/'
+end
+

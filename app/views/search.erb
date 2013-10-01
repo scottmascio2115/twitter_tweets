@@ -1,18 +1,14 @@
-<h1> search for it bro</h1>
+<h1> Find Your Fishing Spot</h1>
+
 <ul>
-<% @tweets.each do |tweet| %>
-  <li><%= tweet %></li>
-<% end %>
+  <% @tweets.each do |tweet| %>
+     <% if tweet[:geo] || tweet[:place]%>
+      <li><a href="http://www.twitter.com/<%= tweet[:user][:screen_name] %>"><img src="<%= tweet[:profile_image_url] %>" alt="Smiley face" height="50" width="50"></a><%="#{tweet.from_user}: #{tweet.text}" %><%= tweet[:geo][:coordinates] %> <%= tweet[:place][:full_name] %>,<%= tweet[:place][:country] %></li>
+    
+    <% end %>
+  <% end %>
 </ul>
 
-<% @images.each do |image| %>  
-  <% if image[:geo] %>
-<a href="http://www.twitter.com/<%= image[:user][:screen_name] %>"><img src="<%= image[:profile_image_url] %>" alt="Smiley face" height="250" width="250"></a>
-  <%= image[:geo][:coordinates] %>
-  
-  <% end %>
-
-    
 
 
-<% end %>
+
