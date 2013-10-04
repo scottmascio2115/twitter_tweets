@@ -16,7 +16,7 @@ gem 'activesupport'
 gem 'activerecord'
 
 gem 'rake'
-
+gem 'geocoder'
 gem 'shotgun'
 
 group :test do

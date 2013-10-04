@@ -2,41 +2,44 @@ get '/' do
   erb :index
 end
 
-get '/:username' do
-  @user = TwitterUser.find_by_user_name(params[:username])
-  @user.tweets_stale?
-  @tweets = @user.tweets
-  erb :tweets
+get '/about' do
+
+  erb :_about
 end
 
-post '/username' do
-  username = params[:name]
-  @user = TwitterUser.find_or_create_by_user_name(username)
- 
+get '/fishing_spot/:name/:lat/:long' do
+  puts params.inspect
+  @fisherman = Twitter.user_timeline(params[:name])
 
-  redirect to "/#{username}"
-end
-
-get '/post' do 
-  erb :search
+  @lat = params[:lat]
+  @long = params[:long]
+  puts @lat
+  erb :fishing_spot
 end
 
 post '/post' do 
-  handle = params[:twitter_handle]
-  phrase = params[:phrase]
-  @tweets = []
- 
-  Twitter.search("to:#{handle} #{phrase}", :count => 1000000000, :result_type => "recent").results.map do |status|
+  if params[:city] == "" || params[:phrase] == ""
 
-    @tweets << status 
-  end
+    redirect to '/'
+  else
+    puts params.inspect
+    phrase = params[:phrase]
+    tags = phrase.split(" ")
+    @tweets = []
+    @city = params[:city]
+    @city = Geocoder.search(@city)
+    lat = @city[0].latitude
+    long = @city[0].longitude
+    
+    tags.each do |tag|
+      Twitter.search(tag,:count => 100, :geocode => "#{lat},#{long},50mi").results.map do |status|
 
-  erb :search
+        @tweets << status 
+      end
+    end
+   end
+    erb :search
 end
 
-post '/create_tweet' do 
-  Twitter.update(params[:text])
 
-  redirect to '/'
-end
 

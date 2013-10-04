@@ -1,0 +1,10 @@
+
+<dl>
+  <dt>Screename:</dt>
+  <dd><%= @fisherman.first.user.screen_name %>
+</dl>
+
+<img src="http://maps.googleapis.com/maps/api/staticmap?center=<%=@lat%>,<%= @long%>&zoom=17&size=600x300&&markers=color:blue%7Clabel:S%7C<%= @lat%>,<%=@long%>&maptype=road&sensor=false"  height="500" width="500">
+
+
+<a href='/'>Home</a>

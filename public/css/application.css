@@ -1,3 +1,12 @@
+body {
+  text-align: center;
+  font-family: "Lucida Console", Monaco, monospace;
+  background: url('/blackandwhite.jpg') fixed;
+  background-repeat:no-repeat;
+  background-size: cover; 
+  color: 'black';
+}
+
 .container {
   margin: 20px auto;
   width: 600px;
@@ -5,15 +14,56 @@
   border: 1px dotted black;
 
 }
+
+a {
+  color: #DC143C;
+}
+
+p {
+  background: rgba(255, 255, 255, 0.5);
+  width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  border-radius:9px;
+}
+
+dl {
+  background: rgba(255, 255, 255, 0.5);
+  width: 600px;
+  margin: 0 auto;
+  border:1px solid black;
+}
+
+dt {font-size:200%;
+    font-weight:bold;
+    text-decoration:underline;
+    
+}
+
+dd {font-size:150%;
+
+   
+}
+
+ 
+
 th {
   text-align: left;
 }
 
-body {
-  text-align: center;
-  background-color: green;
-}
 
 h1{
+  font-family: "Lucida Console", Monaco, monospace;
+  text-align: center;
+  color: 'black';
+  text-decoration:underline;
+}
+
+ul {
+
+  text-align: center;
+}
+ul li {
+  
   text-align: center;
 }
